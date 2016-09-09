@@ -47,6 +47,7 @@
     <string name="shop_is_empty">店名不能为空</string>
     <string name="address_is_empty">地址不能为空</string>
     <string name="price_is_empty">价格不能为空</string>
+    <string name="upload_failed">图片上传失败</string>
     <string name="upload_complete">图片上传完成</string>
     <string name="upload_ask_complete">发布成功</string>
     <string name="upload_ask_failed">发布失败</string>

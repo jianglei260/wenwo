@@ -22,13 +22,18 @@ import com.myworld.wenwo.common.BaseActivity;
 import com.myworld.wenwo.data.entity.AskMe;
 import com.myworld.wenwo.data.repository.AskMeRepository;
 import com.myworld.wenwo.databinding.ActivityDetialBinding;
+import com.myworld.wenwo.databinding.DetailTagAddItemBinding;
 import com.myworld.wenwo.found.AskViewModel;
 import com.myworld.wenwo.found.LikeStateChangedListener;
 import com.myworld.wenwo.utils.MD5;
+import com.myworld.wenwo.utils.ObservableUtil;
 import com.myworld.wenwo.view.widget.TitleBar;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import rx.Observable;
+import rx.Subscriber;
 
 public class DetialActivity extends BaseActivity implements LikeStateChangedListener {
     public static final String OBJTCT_ID = "objectId";
@@ -39,6 +44,8 @@ public class DetialActivity extends BaseActivity implements LikeStateChangedList
     private IWXAPI api;
     private Object askViewModel;
     private String objectId;
+    private ActivityDetialBinding dataBinding;
+    private int position;
 
     @Override
 
@@ -46,7 +53,7 @@ public class DetialActivity extends BaseActivity implements LikeStateChangedList
         super.onCreate(savedInstanceState);
 
         objectId = getIntent().getStringExtra(OBJTCT_ID);
-        int position = getIntent().getIntExtra(POSITION, -1);
+        position = getIntent().getIntExtra(POSITION, -1);
         Intent intent = getIntent();
         String scheme = intent.getScheme();
         Uri uri = intent.getData();
@@ -56,10 +63,14 @@ public class DetialActivity extends BaseActivity implements LikeStateChangedList
             }
         }
         AskMe askMe = AskMeRepository.getInstance().getAsk(objectId);
-        ActivityDetialBinding dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_detial);
+        if (askMe == null) {
+            getAskMeAndBind(objectId);
+        }
+        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_detial);
         viewModel = new DetialViewModel(this, askMe, position);
         viewModel.setLikeStateChangedListener(this);
         dataBinding.setDetialViewModel(viewModel);
+
         TitleBar titleBar = (TitleBar) findViewById(R.id.title_bar);
         titleBar.getLeftImage().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +107,30 @@ public class DetialActivity extends BaseActivity implements LikeStateChangedList
         });
         EventBus.getInstance().regist(this);
         api = WXAPIFactory.createWXAPI(this, Config.APP_ID);
+    }
+
+    public void getAskMeAndBind(final String objectId) {
+        ObservableUtil.runOnUI(new Observable.OnSubscribe<AskMe>() {
+            @Override
+            public void call(Subscriber<? super AskMe> subscriber) {
+                subscriber.onNext(AskMeRepository.getInstance().getAskDetail(Config.USERNAME, objectId));
+            }
+        }, new Subscriber<AskMe>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(AskMe askMe) {
+                dataBinding.setDetialViewModel(new DetialViewModel(DetialActivity.this, askMe, position));
+            }
+        });
     }
 
     @Override

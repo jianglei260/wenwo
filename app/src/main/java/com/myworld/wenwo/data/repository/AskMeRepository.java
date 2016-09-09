@@ -62,8 +62,6 @@ public class AskMeRepository implements AskMeDataSource {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        if (askMe == null)
-            askMe = getAskDetail(Config.USERNAME, objectId);
         return askMe;
     }
 

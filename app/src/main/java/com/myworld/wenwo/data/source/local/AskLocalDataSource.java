@@ -35,7 +35,8 @@ public class AskLocalDataSource implements AskMeDataSource {
 
     @Override
     public AskMe getAsk(String objectId) {
-        return ObjectCopyUtil.copyAskMe(Realm.getDefaultInstance().where(AskMe.class).equalTo("objectId", objectId).findFirst());
+        AskMe askMe = Realm.getDefaultInstance().where(AskMe.class).equalTo("objectId", objectId).findFirst();
+        return askMe == null ? askMe : ObjectCopyUtil.copyAskMe(askMe);
     }
 
     @Override
@@ -149,7 +150,8 @@ public class AskLocalDataSource implements AskMeDataSource {
         }
         return items;
     }
-    public void resetBanner(List<BannerItem> bannerItems){
+
+    public void resetBanner(List<BannerItem> bannerItems) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         realm.delete(BannerItem.class);

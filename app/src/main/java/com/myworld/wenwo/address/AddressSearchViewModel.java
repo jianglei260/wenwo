@@ -43,7 +43,7 @@ public class AddressSearchViewModel implements ViewModel {
     private Context context;
     public ObservableField<String> cityText = new ObservableField<>();
     public ObservableField<String> addressText = new ObservableField<>("正在定位...");
-//    public ObservableDouble geoX=new ObservableDouble();
+    //    public ObservableDouble geoX=new ObservableDouble();
 //    public ObservableDouble geoY=new ObservableDouble();
 //    public ObservableField<String> street=new ObservableField<>();
     private BDLocation bdLocation;
@@ -63,31 +63,39 @@ public class AddressSearchViewModel implements ViewModel {
         }
     };
 
-    public ReplyCommand myLocationClick=new ReplyCommand(new Action0() {
+    public ReplyCommand myLocationClick = new ReplyCommand(new Action0() {
         @Override
         public void call() {
+            if (bdLocation == null)
+                return;
             Config.geo_latitude = bdLocation.getLatitude();
             Config.geo_longtitude = bdLocation.getLongitude();
-            Config.geo_address.set(bdLocation.getStreet()+bdLocation.getStreetNumber());
-            EventBus.getInstance().onEevent(FoundFragment.class,"reload");
-            ((AddressSearchActivity)context).finish();
+            Config.geo_address.set(bdLocation.getStreet() + bdLocation.getStreetNumber());
+            EventBus.getInstance().onEevent(FoundFragment.class, "reload");
+            ((AddressSearchActivity) context).finish();
         }
     });
+
     public AddressSearchViewModel(Context context) {
         this.context = context;
         findHost();
         getLocation();
     }
-    private void getLocation(){
+
+    private void getLocation() {
         final LocationClient client = new LocationClient(context);
         SplashActivity.initLocation(client);
         client.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
                 Log.d("position", "lat:" + bdLocation.getLatitude() + "______longt" + bdLocation.getLongitude());
-                AddressSearchViewModel.this.bdLocation=bdLocation;
+                if (bdLocation==null){
+                    client.start();
+                    return;
+                }
+                AddressSearchViewModel.this.bdLocation = bdLocation;
                 cityText.set(bdLocation.getCity());
-                addressText.set(bdLocation.getDistrict()+bdLocation.getStreet()+bdLocation.getStreetNumber());
+                addressText.set(bdLocation.getDistrict() + bdLocation.getStreet() + bdLocation.getStreetNumber());
                 client.stop();
             }
         });

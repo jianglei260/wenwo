@@ -52,6 +52,7 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
     private PreviewViewModel previewViewModel;
     private ImageTimelineView imageTimelineView;
     private boolean uploaded;
+    private AlertDialog dialog;
 
     public static PreviewFragment newInstance() {
 
@@ -86,23 +87,33 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
         });
         imageTimelineView = (ImageTimelineView) root.findViewById(R.id.desc_image);
         imageTimelineView.setOnClickListener(this);
+        dialog = new AlertDialog.Builder(getActivity()).setView(R.layout.dialog_lodding).create();
         return root;
     }
 
     UpCompletionHandler handler = new UpCompletionHandler() {
         @Override
         public void complete(String key, ResponseInfo info, JSONObject response) {
-            Toast.makeText(WenWoApplication.getInstance(), getString(R.string.upload_complete), Toast.LENGTH_SHORT).show();
+            if (info.isOK()) {
+                Toast(R.string.upload_ask_complete);
+            } else {
+                Toast.makeText(WenWoApplication.getInstance(), getString(R.string.upload_failed), Toast.LENGTH_SHORT).show();
+            }
+            if (dialog.isShowing())
+                dialog.dismiss();
+            if (uploaded) {
+                EventBus.getInstance().onEevent(AddActivity.class, "sendComplete");
+            }
         }
     };
 
     private void upload() {
-        final AlertDialog dialog = new AlertDialog.Builder(getActivity()).setView(R.layout.dialog_lodding).create();
+
         dialog.show();
         ObservableUtil.runOnUI(new rx.Observable.OnSubscribe<Boolean>() {
             @Override
             public void call(Subscriber<? super Boolean> subscriber) {
-                subscriber.onNext(doUpload(handler));
+                subscriber.onNext(doUpload());
             }
         }, new Subscriber<Boolean>() {
             @Override
@@ -118,13 +129,17 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onNext(Boolean complete) {
                 if (complete) {
-                    Toast(R.string.upload_ask_complete);
                     uploaded = true;
-                    EventBus.getInstance().onEevent(AddActivity.class,"sendComplete");
+                    if (!TextUtils.isEmpty(imageKey))
+                        uploadImage(imageKey, ((AddActivity) getActivity()).getImageData(), handler);
+                    else {
+                        Toast(R.string.upload_ask_complete);
+                        dialog.dismiss();
+                        EventBus.getInstance().onEevent(AddActivity.class, "sendComplete");
+                    }
                 } else {
                     Toast(R.string.upload_ask_failed);
                 }
-                dialog.dismiss();
             }
         });
     }
@@ -217,7 +232,9 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
         return askMe;
     }
 
-    public boolean doUpload(final UpCompletionHandler handler) {
+    private String imageKey;
+
+    public boolean doUpload() {
         AskMe askMe = getAskMe();
         final byte[] imageData = ((AddActivity) getActivity()).getImageData();
         Log.d("___________upload ask:", askMe.toString());
@@ -225,35 +242,42 @@ public class PreviewFragment extends Fragment implements View.OnClickListener {
             String key = "/" + Config.USERNAME + "/" + System.currentTimeMillis() + ".jpg";
             String json = "[{\"image\":\"http://o83np3eq2.bkt.clouddn.com/" + key + "\"}]";
             askMe.setAskImage(json);
-            try {
-                QiniuUitl.uploadFile(imageData, key, new UpCompletionHandler() {
-                    int retryTimes = 0;
-
-                    @Override
-                    public void complete(String key, ResponseInfo info, JSONObject response) {
-                        if (!info.isOK()) {
-                            if (retryTimes > 3)
-                                return;
-                            try {
-                                QiniuUitl.uploadFile(imageData, key, this);
-                                retryTimes++;
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-//                            if (handler != null)
-//                                handler.complete(key, info, response);
-                        }
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            imageKey = key;
         }
         if (isEdit())
             return AskMeRepository.getInstance().editAsk(askMe, Config.USERNAME);
         else
             return AskMeRepository.getInstance().sendAsk(askMe, Config.USERNAME);
+    }
+
+    public void uploadImage(String key, final byte[] imageData, final UpCompletionHandler handler) {
+        try {
+            QiniuUitl.uploadFile(imageData, key, new UpCompletionHandler() {
+                int retryTimes = 0;
+
+                @Override
+                public void complete(String key, ResponseInfo info, JSONObject response) {
+                    if (!info.isOK()) {
+                        if (retryTimes > 3) {
+                            Toast.makeText(WenWoApplication.getInstance(), getString(R.string.upload_complete), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        try {
+                            QiniuUitl.uploadFile(imageData, key, this);
+                            retryTimes++;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        if (handler != null)
+                            handler.complete(key, info, response);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isEdit() {

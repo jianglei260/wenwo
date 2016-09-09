@@ -9,6 +9,7 @@ import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
 import com.myworld.wenwo.BR;
 import com.myworld.wenwo.R;
+import com.myworld.wenwo.application.Config;
 import com.myworld.wenwo.data.entity.BannerItem;
 import com.myworld.wenwo.data.repository.AskMeRepository;
 import com.myworld.wenwo.utils.ObservableUtil;
@@ -58,7 +59,7 @@ public class TopicViewModel implements ViewModel {
         ObservableUtil.runOnUI(new Observable.OnSubscribe<List<BannerItem>>() {
             @Override
             public void call(Subscriber<? super List<BannerItem>> subscriber) {
-                subscriber.onNext(AskMeRepository.getInstance().getBanner());
+                subscriber.onNext(AskMeRepository.getInstance().getTopic(Config.USERNAME));
             }
         }, new Subscriber<List<BannerItem>>() {
             @Override
