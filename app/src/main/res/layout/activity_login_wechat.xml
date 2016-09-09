@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.myworld.wenwo.login.LoginViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/activity_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="com.myworld.wenwo.login.LoginActivity">
+
+        <com.myworld.wenwo.view.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftImage="@drawable/back"
+            app:titleText="用户登录" />
+
+        <ImageView
+            android:id="@+id/login_name"
+            android:layout_width="120dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_login_name" />
+
+        <ImageView
+            android:id="@+id/login_bg"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_below="@id/title_bar"
+            android:scaleType="matrix"
+            android:src="@drawable/login_bg" />
+
+        <TextView
+            android:id="@+id/wechat_login"
+            style="@style/wechatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_name"
+            android:layout_marginTop="64dp"
+            android:text="微信登录 开启问我"
+            android:drawableLeft="@drawable/ic_weixin"
+            android:gravity="center"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            bind:clickCommand="@{loginViewModel.wechatLogin}"
+            android:drawablePadding="4dp"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp" />
+    </RelativeLayout>
+
+</layout>

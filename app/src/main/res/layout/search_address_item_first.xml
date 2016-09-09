@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="itemViewModel"
+            type="com.myworld.wenwo.address.AddressItemViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        bind:clickCommand="@{itemViewModel.itemClick}"
+        android:background="@color/white"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginBottom="1dp">
+        <TextView
+            android:id="@+id/hot"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:drawableLeft="@drawable/fire"
+            android:text="热门"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:drawablePadding="4dp"
+            android:paddingLeft="16dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:layout_toRightOf="@id/hot"
+            android:background="@color/bar_background_color"
+            android:layout_marginLeft="16dp"/>
+        <TextView
+            android:layout_below="@id/hot"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingLeft="16dp"
+            android:text="@{itemViewModel.addressText}"
+            android:gravity="center_vertical"
+            >
+
+        </TextView>
+    </RelativeLayout>
+</layout>

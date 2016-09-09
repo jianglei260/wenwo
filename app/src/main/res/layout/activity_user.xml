@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="userViewModel"
+            type="com.myworld.wenwo.user.UserViewModel" />
+
+        <import type="java.lang.String" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="com.myworld.wenwo.application.Config" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/activity_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bar_background_color"
+        tools:context="com.myworld.wenwo.detial.DetialActivity">
+
+        <com.myworld.wenwo.view.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftImage="@drawable/back"
+            app:rightImage="@drawable/ic_setting"
+            app:rightImageVisible="true"
+            app:titleText="个人中心" />
+
+        <RelativeLayout
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_below="@id/title_bar"
+            android:background="@color/black_overlay">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                bind:image_uri="@{userViewModel.imageUrl}"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:overlayImage="@color/black_overlay" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/user_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="32dp"
+                bind:clickCommand="@{userViewModel.imageClick}"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:placeholderImage="@drawable/ic_head_default"
+                fresco:roundAsCircle="true"
+                fresco:roundingBorderColor="@color/white"
+                fresco:roundingBorderWidth="4dp" />
+
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/whiteText"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_below="@id/user_image"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@{TextUtils.isEmpty(Config.USERNAME)?@string/not_login:userViewModel.userName}" />
+
+            <LinearLayout
+                android:id="@+id/info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_name"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    bind:clickCommand="@{userViewModel.likeClick}">
+
+                    <TextView
+                        style="@style/whiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(userViewModel.likeNum)}" />
+
+                    <TextView
+                        style="@style/whiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="想吃" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    bind:clickCommand="@{userViewModel.sharedClick}">
+
+                    <TextView
+                        style="@style/whiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(userViewModel.sendNum)}" />
+
+                    <TextView
+                        style="@style/whiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="发布" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/whiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(userViewModel.money)}" />
+
+                    <TextView
+                        style="@style/whiteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="受益" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bought_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/header_layout"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            bind:clickCommand="@{userViewModel.havedClick}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32dp"
+                android:drawableLeft="@drawable/ic_bought_svg"
+                android:drawablePadding="8dp"
+                android:text="我的订单"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="40dp"
+                android:text="@{String.valueOf(userViewModel.buyNum)}"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_detail"
+                android:tint="@color/gray" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/invite_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/bought_layout"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white"
+            bind:clickCommand="@{userViewModel.shareToClick}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32dp"
+                android:drawableLeft="@drawable/ic_invite"
+                android:drawablePadding="8dp"
+                android:text="邀请好友使用"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_detail"
+                android:tint="@color/gray" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/callback_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/invite_layout"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/white"
+            bind:clickCommand="@{userViewModel.callbackClick}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="32dp"
+                android:drawableLeft="@drawable/ic_callback"
+                android:drawablePadding="8dp"
+                android:text="给小问提意见"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_detail"
+                android:tint="@color/gray" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/callback_layout"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="退出当前帐号"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16sp"
+            android:visibility="@{TextUtils.isEmpty(userViewModel.user)?View.GONE:View.VISIBLE}"
+            bind:clickCommand="@{userViewModel.logoutClick}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="32dp"
+            android:drawableLeft="@drawable/ic_wenwo_svg"
+            android:drawablePadding="8dp"
+            android:text="让经验帮你赚钱"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="tagItemModel"
+            type="com.myworld.wenwo.add.TagItemViewModel" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <import type="android.widget.EditText" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="64dp"
+            android:layout_marginTop="96dp"
+            android:gravity="center"
+            android:hint="填入或选择信息的标签"
+            android:text="@={tagItemModel.contentString}" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_text"
+            bind:itemView="@{tagItemModel.itemView}"
+            bind:items="@{tagItemModel.tags}"
+            bind:layoutManager="@{LayoutManagers.staggeredGrid(3,1)}" />
+    </RelativeLayout>
+</layout>

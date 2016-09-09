@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ee7e2e</color>
+    <color name="colorPrimaryDark">#eeee7e2e</color>
+    <color name="colorAccent">#ee7e2e</color>
+    <color name="bar_background_color">#F8F8F8</color>
+    <color name="found_background_color">#F4E8E3</color>
+    <color name="item_title_color">#333333</color>
+    <color name="gray">#dddddd</color>
+    <color name="white">#ffffff</color>
+    <color name="wechat_green">#3eb94e</color>
+    <color name="wechat_greenDark">#ee3eb94e</color>
+    <color name="transparent">#00000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="light_sea_green">#1CCDA6</color>
+</resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.found.LocationViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="160dp"
+                android:layout_height="24dp"
+                android:drawableLeft="@drawable/shape_vertical_line"
+                android:drawablePadding="4dp"
+                android:drawableRight="@drawable/indicator_down"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:text="@{viewModel.locationText}"
+                bind:clickCommand="@{viewModel.locationClick}" />
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:drawablePadding="4dp"
+                android:drawableRight="@{viewModel.visible?@drawable/indicator_up:@drawable/indicator_down}"
+                android:gravity="right|center_vertical"
+                android:paddingRight="8dp"
+                android:text="@{viewModel.dsiatanceSelected}"
+                bind:clickCommand="@{viewModel.dsiatanceSelectedClick}" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="16dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/shape_vertical_line" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header"
+            android:visibility="@{viewModel.visible?View.VISIBLE:View.GONE}">
+
+            <TextView
+                android:id="@+id/distance0"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="right|center_vertical"
+                android:paddingRight="32dp"
+                android:text="@{viewModel.dsiatance0}"
+                bind:clickCommand="@{viewModel.dsiatance0Click}" />
+
+            <TextView
+                android:id="@+id/distance1"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_below="@id/distance0"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:gravity="right|center_vertical"
+                android:paddingRight="32dp"
+                android:text="@{viewModel.dsiatance1}"
+                bind:clickCommand="@{viewModel.dsiatance1Click}" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

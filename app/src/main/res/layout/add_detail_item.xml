@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="detailViewModel"
+            type="com.myworld.wenwo.add.DetailItemViewModel" />
+
+        <import type="android.widget.EditText" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="96dp"
+                android:text="@string/detail_title"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_below="@id/text"
+                android:layout_margin="16dp"
+                android:background="@drawable/shape_edittext_border"
+                android:text="@={detailViewModel.content}"
+                android:padding="8dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/edit_text"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:focusable="true"
+                bind:itemView="@{detailViewModel.itemView}"
+                bind:items="@{detailViewModel.tags}"
+                bind:layoutManager="@{LayoutManagers.linear()}" />
+        </RelativeLayout>
+    </ScrollView>
+</layout>

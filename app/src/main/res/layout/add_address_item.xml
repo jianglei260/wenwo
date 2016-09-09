@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="addressItemModel"
+            type="com.myworld.wenwo.add.AddressItemViewModel" />
+
+        <import type="android.widget.EditText" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.myworld.wenwo.view.widget.MapViewWrapper
+            android:id="@+id/map_view_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:simpleAddress="@{addressItemModel.address}"/>
+    </RelativeLayout>
+</layout>

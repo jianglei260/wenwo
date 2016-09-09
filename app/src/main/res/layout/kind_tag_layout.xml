@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.kinds.KindTagViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="0.5dp"
+        android:layout_marginLeft="0.5dp"
+        android:layout_marginRight="0.5dp"
+        android:layout_marginTop="0.5dp"
+        android:background="@{viewModel.rightTop?@drawable/shape_tag_right_top:viewModel.rightBottom?@drawable/shape_tag_right_bottom:viewModel.leftBottom?@drawable/shape_tag_left_bottom:@drawable/shape_tag_normal}"
+        android:backgroundTint="@{viewModel.haveBg?@color/kind_tag_bg:@color/white}">
+
+        <TextView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@{viewModel.tagText}"
+            bind:clickCommand="@{viewModel.clickCommand}"
+            />
+    </FrameLayout>
+
+</layout>

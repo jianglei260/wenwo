@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.delete.DeleteViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/activity_delete"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bar_background_color"
+        android:orientation="vertical">
+
+        <com.myworld.wenwo.view.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftImage="@drawable/back"
+            app:titleText="删除下架" />
+
+        <TextView
+            android:id="@+id/delete_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_bar"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:text="下架理由:" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_below="@id/delete_label"
+            android:layout_margin="16dp"
+            android:background="@drawable/shape_search_box_border"
+            android:gravity="start"
+            android:hint="请写下您的下架理由,比如:店铺不存在了"
+            android:padding="16dp"
+            android:textSize="12sp"
+            android:text="@={viewModel.reason}"/>
+
+        <Button
+            style="@style/buttonNormal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="32dp"
+            android:text="确认下架"
+            bind:clickCommand="@{viewModel.deleteClick}"/>
+    </RelativeLayout>
+</layout>

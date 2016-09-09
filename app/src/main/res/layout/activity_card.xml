@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.card.CardViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/activity_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8FAFA"
+        android:orientation="vertical">
+
+        <com.myworld.wenwo.view.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftImage="@drawable/back"
+            app:titleText="精选美食卡片" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="8dp"
+                android:visibility="@{viewModel.visible?View.VISIBLE:View.INVISIBLE}">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="32dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="32dp"
+                    android:background="@drawable/shape_hate_bg"
+                    android:gravity="center"
+                    android:text="查看美食"
+                    bind:clickCommand="@{viewModel.lookClick}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="32dp"
+                    android:drawableTop="@drawable/down"
+                    android:gravity="center"
+                    android:text="@{viewModel.downNum}"
+                    bind:clickCommand="@{viewModel.shareClick}"
+                    tools:text="32" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="96dp"
+                    android:drawableTop="@{viewModel.liked?@drawable/like:@drawable/not_like}"
+                    android:gravity="center"
+                    android:text="@{viewModel.likeNum}"
+                    bind:clickCommand="@{viewModel.likeClick}" />
+            </RelativeLayout>
+
+            <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/view_pager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginBottom="72dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:padding="8dp"-->
+            <!--bind:itemView="@{viewModel.itemView}"-->
+            <!--bind:items="@{viewModel.items}"-->
+            <!--bind:onPageSelectedCommand="@{viewModel.cardSelcted}" />-->
+            <com.wenchao.cardstack.CardStack
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="72dp"
+                />
+
+            <com.myworld.wenwo.view.widget.LoaddingView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:visibility="@{viewModel.isRefresh?View.VISIBLE:View.GONE}" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+</layout>

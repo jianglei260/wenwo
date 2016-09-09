@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.address.AddressSearchViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/my_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/hot"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:drawableLeft="@drawable/adress_primary"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:text="我的位置"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_toRightOf="@id/hot"
+                android:background="@color/bar_background_color" />
+
+            <TextView
+                android:id="@+id/cityText"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_below="@id/hot"
+                android:layout_marginBottom="1dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:text="@{viewModel.cityText}" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/hot"
+                android:layout_toRightOf="@id/cityText"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:text="@{viewModel.addressText}"
+                bind:clickCommand="@{viewModel.myLocationClick}"
+                android:textSize="12sp"
+                android:textColor="@color/gray"/>
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/my_location"
+            bind:itemView="@{viewModel.itemView}"
+            bind:items="@{viewModel.items}"
+            bind:layoutManager="@{LayoutManagers.linear()}" />
+
+
+    </RelativeLayout>
+</layout>

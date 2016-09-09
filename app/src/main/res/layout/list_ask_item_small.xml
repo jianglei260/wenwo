@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.found.AskItemViewModel" />
+
+        <import type="android.graphics.Color" />
+        <import type="android.view.View"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/white"
+        bind:clickCommand="@{viewModel.itemClickCommand}">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_below="@id/big_image"
+            android:layout_marginLeft="8dp"
+            android:padding="8dp"
+            bind:image_uri="@{viewModel.imageUrl}"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:roundAsCircle="true"
+            fresco:roundingBorderColor="@color/gray"
+            fresco:roundingBorderWidth="1dp" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_below="@id/big_image"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@id/image"
+            android:padding="8dp"
+            android:text="@{viewModel.desc}"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <LinearLayout
+            android:id="@+id/tag_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/tag_infor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/shape_edittext_border"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:text="@{viewModel.title[0]}"
+                android:textColor="@color/item_title_color"
+                bind:clickCommand="@{viewModel.tag0Click}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/shape_edittext_border"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:text="@{viewModel.title.size()>1?viewModel.title[1]:@string/app_name}"
+                android:textColor="@color/item_title_color"
+                android:visibility="@{viewModel.title.size()>1?View.VISIBLE:View.GONE}"
+                bind:clickCommand="@{viewModel.tag1Click}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/shape_edittext_border"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="4dp"
+                android:text="@{viewModel.title.size()>2?viewModel.title[2]:@string/app_name}"
+                android:textColor="@color/item_title_color"
+                android:visibility="@{viewModel.title.size()>2?View.VISIBLE:View.GONE}"
+                bind:clickCommand="@{viewModel.tag2Click}" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/desc"
+            android:layout_marginRight="16dp"
+            android:drawableLeft="@{viewModel.liked?@drawable/ic_like_selected:@drawable/ic_like}"
+            android:drawablePadding="4dp"
+            android:gravity="bottom"
+            android:text="@{viewModel.likeNum}"
+            android:textColor="@{viewModel.liked?(int)@color/colorPrimary:(int)@color/item_title_color}"
+            bind:clickCommand="@{viewModel.likeClick}" />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tag_layout"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:drawableLeft="@drawable/adress_gray"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@{viewModel.distance}"
+            android:textColor="@color/deep_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tag_layout"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/distance"
+            android:drawableLeft="@drawable/eye_page_view_gray"
+            android:drawablePadding="4dp"
+            android:padding="8dp"
+            android:text="@{viewModel.lookNum}"
+            android:textColor="@color/deep_gray" />
+
+
+    </RelativeLayout>
+</layout>

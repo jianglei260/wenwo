@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TitleBar">
+        <attr name="titleText" format="string" />
+        <attr name="leftImage" format="integer" />
+        <attr name="rightImage" format="integer" />
+        <attr name="leftImageVisible" format="boolean" />
+        <attr name="rightImageVisible" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="TimelineView">
+        <attr name="lineTitle" format="string" />
+        <attr name="lineImage" format="reference" />
+        <attr name="lineColor" format="color" />
+        <attr name="lineVisible" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="SimpleTextTimelineView">
+        <attr name="contentText" format="string" />
+    </declare-styleable>
+    <declare-styleable name="ListTimelineView">
+        <attr name="listDesc" format="string" />
+    </declare-styleable>
+    <declare-styleable name="ImageTimelineView">
+        <attr name="lineUri" format="string" />
+    </declare-styleable>
+    <declare-styleable name="EditText">
+        <attr name="checkMaxValue" format="float" />
+        <attr name="editable" format="enum" />
+        <attr name="bindEditText" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="MapViewWrapper">
+        <attr name="address" format="string" />
+        <attr name="geoX" format="float" />
+        <attr name="geoY" format="float" />
+        <attr name="addressAttrChanged" format="reference" />
+    </declare-styleable>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="CircularImage">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+    <declare-styleable name="LoaddingView">
+        <attr name="lodding_text" format="string" />
+        <attr name="horizontal" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="Banner">
+        <attr name="urls" format="reference" />
+        <attr name="clickListener" format="reference" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_haved">haved</string>
+    <string name="app_name">wenwo</string>
+    <string name="default_load_text">loadding</string>
+    <string name="error">system error</string>
+
+</resources>

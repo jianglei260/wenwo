@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="previewViewModel"
+            type="com.myworld.wenwo.add.preview.PreviewViewModel" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <import type="android.text.TextUtils" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/activity_detial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.myworld.wenwo.detial.DetialActivity">
+
+        <com.myworld.wenwo.view.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftImage="@drawable/back"
+            app:rightImage="@drawable/ic_send"
+            app:rightImageVisible="true"
+            app:titleText="分享" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title_bar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <com.myworld.wenwo.view.widget.ImageTimelineView
+                    android:id="@+id/desc_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/header"
+                    android:layout_marginTop="8dp"
+                    app:lineColor="#3EBDE5"
+                    app:lineImage="@drawable/ic_image"
+                    app:lineTitle="图片"
+                    app:lineUri="@{previewViewModel.imageUri}"
+                    app:lineVisible="true" />
+
+                <com.myworld.wenwo.view.widget.TagTimelineVIew
+                    android:id="@+id/title_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="64dp"
+                    app:tags="@{previewViewModel.title}"
+                    app:lineColor="#2B82FD"
+                    app:lineImage="@drawable/ic_tag"
+                    app:lineTitle="标签"
+                    app:lineVisible="true"
+                    bind:clickCommand="@{previewViewModel.tagClick}" />
+
+                <com.myworld.wenwo.view.widget.SimpleTextTimelineView
+                    android:id="@+id/resason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/header"
+                    android:minHeight="32dp"
+                    app:contentText="@{TextUtils.isEmpty(previewViewModel.desc)?@string/write_reason:previewViewModel.desc}"
+                    app:lineColor="#F13A01"
+                    app:lineImage="@drawable/ic_suggest"
+                    app:lineTitle="推荐理由"
+                    app:lineVisible="true"
+                    bind:clickCommand="@{previewViewModel.reasonClick}" />
+
+                <com.myworld.wenwo.view.widget.ListTimelineView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/resason"
+                    android:minHeight="32dp"
+                    app:lineColor="#F4BC1C"
+                    app:lineImage="@drawable/ic_detial"
+                    app:lineTitle="信息详情"
+                    app:lineVisible="true"
+                    app:listDesc="@{TextUtils.isEmpty(previewViewModel.detial)?@string/write_food_detail:previewViewModel.detial}"
+                    bind:clickCommand="@{previewViewModel.detailClick}"
+                    bind:itemView="@{previewViewModel.itemView}"
+                    bind:items="@{previewViewModel.tags}"
+                    bind:layoutManager="@{LayoutManagers.linear()}" />
+
+                <com.myworld.wenwo.view.widget.SimpleTextTimelineView
+                    android:id="@+id/shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/header"
+                    android:minHeight="32dp"
+                    app:contentText="@{TextUtils.isEmpty(previewViewModel.shop)?@string/write_shop_name:previewViewModel.shop}"
+                    app:lineColor="#5459CD"
+                    app:lineImage="@drawable/ic_shop"
+                    app:lineTitle="@string/shop_name"
+                    app:lineVisible="true"
+                    bind:clickCommand="@{previewViewModel.shopClick}" />
+
+                <com.myworld.wenwo.view.widget.SimpleTextTimelineView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/header"
+                    android:minHeight="32dp"
+                    app:contentText="@{TextUtils.isEmpty(previewViewModel.address)?@string/write_address:previewViewModel.address}"
+                    app:lineColor="#42B93A"
+                    app:lineImage="@drawable/ic_address"
+                    app:lineTitle="@string/address"
+                    app:lineVisible="true"
+                    bind:clickCommand="@{previewViewModel.addressClick}" />
+
+                <com.myworld.wenwo.view.widget.SimpleTextTimelineView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/header"
+                    android:minHeight="32dp"
+                    app:contentText="@{TextUtils.isEmpty(previewViewModel.price)?@string/write_price:previewViewModel.price}"
+                    app:lineColor="#42B93A"
+                    app:lineImage="@drawable/ic_price"
+                    app:lineTitle="价格"
+                    app:lineVisible="false"
+                    bind:clickCommand="@{previewViewModel.priceClick}" />
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</layout>

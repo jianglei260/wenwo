@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="shopItemModel"
+            type="com.myworld.wenwo.add.ShopItemViewModel" />
+
+        <import type="android.widget.EditText" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="96dp"
+            android:text="@string/shop_title"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/text"
+            android:layout_margin="16dp"
+            android:background="@drawable/shape_edittext_border"
+            android:padding="8dp"
+            android:text="@={shopItemModel.content}"
+            android:hint="这很重要,别写错啦"/>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.myworld.wenwo.login.LoginViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/activity_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="com.myworld.wenwo.login.LoginActivity">
+
+        <!--<com.myworld.wenwo.view.widget.TitleBar-->
+        <!--android:id="@+id/title_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:leftImage="@drawable/ic_back"-->
+        <!--app:titleText="用户登录" />-->
+        <ImageView
+            android:id="@+id/login_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_login_bg" />
+
+        <EditText
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:drawableLeft="@drawable/ic_user_head"
+            android:drawablePadding="32dp"
+            android:hint="手机号" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/user_name"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:drawableLeft="@drawable/ic_password"
+            android:drawablePadding="32dp"
+            android:hint="密码" />
+
+        <LinearLayout
+            android:id="@+id/regist_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_marginTop="16dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="注册问我"
+                android:textColor="@color/colorPrimary"
+                bind:clickCommand="@{loginViewModel.registerClick}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="32dp"
+                android:text="| 忘记密码" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/login"
+            style="@style/buttonNormal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/regist_layout"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="16dp"
+            android:text="登录"
+            bind:clickCommand="@{loginViewModel.wechatLogin}" />
+
+        <Button
+            android:id="@+id/wechat_login"
+            style="@style/wechatButton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/login"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="8dp"
+            android:text="微信登录"
+            bind:clickCommand="@{loginViewModel.wechatLogin}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="32dp"
+            android:text="@string/just_see" />
+    </RelativeLayout>
+
+</layout>

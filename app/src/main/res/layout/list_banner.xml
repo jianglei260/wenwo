@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="bannerViewModel"
+            type="com.myworld.wenwo.found.BannerItemViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="178dp"
+        android:orientation="vertical">
+
+        <com.youth.banner.Banner
+            android:layout_width="match_parent"
+            android:layout_height="178dp"
+            app:clickListener="@{bannerViewModel.bannerClickListener}"
+            app:indicator_height="8dp"
+            app:indicator_width="8dp"
+            app:is_auto_play="true"
+            app:urls="@{bannerViewModel.items}" />
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="itemViewModel"
+            type="com.myworld.wenwo.detial.DetialTagViewModel" />
+
+        <import type="android.widget.EditText" />
+
+        <import type="com.myworld.wenwo.adapter.Editable" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/tag_name"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/tag_name_bg"
+            android:hint="环境"
+            android:paddingLeft="8dp"
+            android:text="@={itemViewModel.tagName}"
+            android:textSize="12sp"
+            app:editable="@{itemViewModel.editable?Editable.YES:Editable.NO}" />
+
+        <ImageView
+            android:id="@+id/remove"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/remove"
+            android:visibility="@{itemViewModel.visible?EditText.VISIBLE:EditText.GONE}"
+            bind:clickCommand="@{itemViewModel.removeClick}" />
+
+        <EditText
+            android:id="@+id/tag_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toLeftOf="@id/remove"
+            android:layout_toRightOf="@id/tag_name"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请在此对环境描述"
+            android:text="@={itemViewModel.tagValue}"
+            android:textSize="12sp"
+            app:editable="@{itemViewModel.editable?Editable.YES:Editable.NO}" />
+    </RelativeLayout>
+</layout>

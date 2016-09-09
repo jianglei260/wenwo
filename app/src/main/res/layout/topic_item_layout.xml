@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="itemViewModel"
+            type="com.myworld.wenwo.topics.TopicItemViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="152dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        bind:clickCommand="@{itemViewModel.itemClick}">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:placeholderImage="@mipmap/ic_launcher"
+            bind:uri="@{itemViewModel.imageUrl}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shape_topic_bg"
+            android:gravity="bottom"
+            android:padding="8dp"
+            android:text="@{itemViewModel.title}"
+            android:textColor="@color/white"
+            tools:text="hahah" />
+    </android.support.v7.widget.CardView>
+
+
+</layout>

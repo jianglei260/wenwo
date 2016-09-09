@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.found.AskItemViewModel" />
+
+        <import type="android.graphics.Color" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="136dp"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white"
+        bind:clickCommand="@{viewModel.itemClickCommand}">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginLeft="16dp"
+            android:padding="8dp"
+            bind:uri="@{viewModel.imageUrl}"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:roundAsCircle="true" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/image"
+            android:padding="8dp"
+            android:text="@{viewModel.title[0]}"
+            android:textColor="@color/item_title_color" />
+
+        <TextView
+            android:id="@+id/district"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@{viewModel.district}" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_below="@id/title"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@id/image"
+            android:padding="8dp"
+            android:text="@{viewModel.desc}" />
+
+        <LinearLayout
+            android:layout_width="64dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/image"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@{viewModel.liked?@drawable/shape_buy_bg:@drawable/shape_like_bg}"
+            android:gravity="center"
+            bind:clickCommand="@{viewModel.likeClick}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="想吃"
+                android:textColor="@{viewModel.liked?(int)@color/white:(int)@color/colorPrimary}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:gravity="center"
+                android:text="@{viewModel.likeNum}"
+                android:textColor="@{viewModel.liked?(int)@color/white:(int)@color/colorPrimary}" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="96dp"
+            android:layout_height="24dp"
+            android:layout_below="@id/image"
+            android:layout_marginLeft="104dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@{viewModel.score>9?@drawable/shape_charge_bg:@drawable/shape_free_bg}"
+            android:gravity="center"
+            android:padding="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@{viewModel.score>9?viewModel.price:@string/free}"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/desc"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.date}" />
+    </RelativeLayout>
+</layout>

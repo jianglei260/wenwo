@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+        <variable
+            name="tagViewModel"
+            type="com.myworld.wenwo.add.TagViewModel" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:gravity="center"
+        bind:clickCommand="@{tagViewModel.itemClick}"
+        android:layout_marginLeft="16dp">
+        <TextView
+            android:id="@+id/tag_text"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:background="@drawable/shape_search_box_border"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@{tagViewModel.tagValue}"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center">
+
+        </TextView>
+    </LinearLayout>
+</layout>

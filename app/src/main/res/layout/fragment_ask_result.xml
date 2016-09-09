@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.found.AskViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+    </data>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:refreshing="@{viewModel.isRefresh}"
+        bind:onRefreshCommand="@{viewModel.refreshCommand}">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:adapter="@{viewModel.factory}"
+            bind:itemView="@{viewModel.itemView}"
+            bind:items="@{viewModel.itemViewModels}"
+            bind:layoutManager="@{LayoutManagers.linear()}"
+            bind:onLoadMoreCommand="@{viewModel.loadMoreCommand}" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</layout>

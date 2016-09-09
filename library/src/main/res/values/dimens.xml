@@ -1,0 +1,15 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="title_bar_height">56dp</dimen>
+    <dimen name="title_bar_image_padding">14dp</dimen>
+    <dimen name="title_bar_text_width">128dp</dimen>
+    <dimen name="title_bar_text_height">32dp</dimen>
+    <dimen name="tag_item_height">32dp</dimen>
+    <dimen name="line_width">1dp</dimen>
+    <dimen name="indicator_line_top_margin">20dp</dimen>
+    <dimen name="list_timeline_left_padding">8dp</dimen>
+    <dimen name="time_line_left_margin">20dp</dimen>
+    <dimen name="time_line_top_margin">40dp</dimen>
+</resources>

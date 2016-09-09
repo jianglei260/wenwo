@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevInfor>
+
+    <ShareSDK AppKey="1545eaf55a524" /> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
+    <Wechat AppId="wxb4b71b749fb0ea09" AppSecret="1ab32f010e25ef294d2358181b7ecbef"
+        BypassApproval="false" Enable="true" Id="1" SortId="1" />
+
+    <WechatMoments AppId="wxb4b71b749fb0ea09" AppSecret="1ab32f010e25ef294d2358181b7ecbef"
+        BypassApproval="false" Enable="true" Id="2" SortId="2" />
+
+    <WechatFavorite AppId="wxb4b71b749fb0ea09" AppSecret="1ab32f010e25ef294d2358181b7ecbef"
+        Enable="true" Id="3" SortId="3" />
+    <QQ AppId="1105509763" AppKey="GxHVU2xLmti47Z3x" Enable="true" Id="4" ShareByAppClient="true"
+        SortId="4" />
+
+</DevInfor>

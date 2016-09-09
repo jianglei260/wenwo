@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="reasonItemModel"
+            type="com.myworld.wenwo.add.ReasonItemViewModel" />
+
+        <import type="android.widget.EditText" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textSize="18sp"
+            android:layout_marginTop="96dp"
+            android:text="@string/reason_title" />
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_below="@id/text"
+            android:layout_margin="16dp"
+            android:background="@drawable/shape_edittext_border"
+            android:padding="8dp"
+            android:text="@={reasonItemModel.content}" />
+
+        <TextView
+            android:id="@+id/eg1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_text"
+            android:layout_margin="16dp"
+            android:text="@string/reason_tip_1"
+            bind:clickCommand="@{reasonItemModel.eg1Click}" />
+
+        <TextView
+            android:id="@+id/eg2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eg1"
+            android:layout_margin="16dp"
+            android:text="@string/reason_tip_2"
+            bind:clickCommand="@{reasonItemModel.eg2Click}" />
+
+        <TextView
+            android:id="@+id/eg3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eg2"
+            android:layout_margin="16dp"
+            android:text="@string/reason_tip_3"
+            bind:clickCommand="@{reasonItemModel.eg3Click}" />
+
+        <TextView
+            android:id="@+id/eg4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eg3"
+            android:layout_margin="16dp"
+            android:text="@string/reason_tip_4"
+            bind:clickCommand="@{reasonItemModel.eg4Click}" />
+    </RelativeLayout>
+</layout>

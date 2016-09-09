@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="detialViewModel"
+            type="com.myworld.wenwo.detial.DetialViewModel" />
+
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers" />
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/activity_detial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.myworld.wenwo.detial.DetialActivity">
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title_bar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:layout_width="match_parent"
+                        android:layout_height="260dp"
+                        android:scaleType="centerCrop"
+                        bind:uri="@{detialViewModel.imageUrl}"
+                        tools:src="@mipmap/ic_launcher" />
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#226c6e6c">
+
+                        <TextView
+                            android:id="@+id/user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginTop="180dp"
+                            android:text="@{detialViewModel.userName}"
+                            android:textColor="@android:color/white"
+                            tools:text="jianglei" />
+
+                        <LinearLayout
+                            android:id="@+id/like_layout"
+                            android:layout_width="64dp"
+                            android:layout_height="24dp"
+                            android:layout_below="@id/user_name"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@{detialViewModel.liked?@drawable/shape_buy_bg:@drawable/shape_like_bg}"
+                            android:gravity="center"
+                            bind:clickCommand="@{detialViewModel.likeClick}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="想吃"
+                                android:textColor="@{detialViewModel.liked?(int)@color/white:(int)@color/colorPrimary}" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="4dp"
+                                android:gravity="center"
+                                android:text="@{detialViewModel.likeNum}"
+                                android:textColor="@{detialViewModel.liked?(int)@color/white:(int)@color/colorPrimary}"
+                                tools:text="22" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:layout_below="@id/user_name"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_toRightOf="@id/like_layout"
+                            android:background="@drawable/shape_buy_bg"
+                            android:clickable="@{detialViewModel.finish}"
+                            android:gravity="center"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:text="@{detialViewModel.haved?@string/text_haved:detialViewModel.price}"
+                            android:textColor="@android:color/white"
+                            bind:clickCommand="@{detialViewModel.buyClick}"
+                            tools:text="0.2元查看" />
+                    </RelativeLayout>
+
+                </FrameLayout>
+
+                <com.myworld.wenwo.view.widget.SimpleTextTimelineView
+                    android:id="@+id/resason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/header"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    app:contentText="@{detialViewModel.desc}"
+                    app:lineColor="#F13A01"
+                    app:lineImage="@drawable/ic_suggest"
+                    app:lineTitle="推荐理由" />
+
+                <com.myworld.wenwo.view.widget.ListTimelineView
+                    android:id="@+id/detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/resason"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    app:lineColor="#F4BC1C"
+                    app:lineImage="@drawable/ic_detial"
+                    app:lineTitle="信息详情"
+                    app:listDesc="@{detialViewModel.detial}"
+                    bind:itemView="@{detialViewModel.itemView}"
+                    bind:items="@{detialViewModel.tags}"
+                    bind:layoutManager="@{LayoutManagers.linear()}" />
+
+                <com.myworld.wenwo.view.widget.SimpleTextTimelineView
+                    android:id="@+id/shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/detail"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    app:contentText="@{detialViewModel.shop}"
+                    app:lineColor="#5459CD"
+                    app:lineImage="@drawable/ic_shop"
+                    app:lineTitle="店名" />
+
+                <com.myworld.wenwo.view.widget.SimpleTextTimelineView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_below="@id/shop"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    app:contentText="@{detialViewModel.address}"
+                    app:lineColor="#42B93A"
+                    app:lineImage="@drawable/ic_address"
+                    app:lineTitle="地址" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/address"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginRight="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="@{detialViewModel.haved?View.VISIBLE:View.GONE}"
+                    bind:clickCommand="@{detialViewModel.debaseClick}">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_hate" />
+
+                    <TextView
+                        android:layout_width="48dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@drawable/shape_hate_bg"
+                        android:gravity="center"
+                        android:text="吐槽" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="212dp"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/ic_bought"
+                    android:visibility="@{detialViewModel.haved?View.VISIBLE:View.GONE}" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/header"
+                    android:background="@color/black_overlay"
+                    android:gravity="center_vertical"
+                    android:text="@{@string/under_hint+detialViewModel.underReason}"
+                    android:paddingLeft="8dp"
+                    android:textColor="@color/white"
+                    android:visibility="@{TextUtils.isEmpty(detialViewModel.underReason)?View.GONE:View.VISIBLE}" />
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <com.myworld.wenwo.view.widget.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.myworld.wenwo.view.widget.TitlebarBehavior"
+            app:leftImage="@drawable/back"
+            app:rightImage="@drawable/ic_more_png"
+            app:rightImageVisible="@{detialViewModel.isOwn}"
+            app:titleText="@{detialViewModel.title[0]}" />
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
+

@@ -1,0 +1,100 @@
+<resources>
+    <string name="app_name">问我∙美食</string>
+    <string name="default_load_text">正在加载</string>
+    <string name="checking_update">正在检查更新</string>
+    <string name="text_haved">已购买</string>
+    <string name="error">获取信息出错</string>
+    <string name="mine">我发布的</string>
+    <string name="free">限时免费</string>
+    <string name="no_charge">免费查看</string>
+    <string name="buy_first">免费查看</string>
+    <string name="just_see">先去瞅瞅 <font color="#ee7e2e">►</font></string>
+    <string name="shop_name">店名(用户购买后才显示)</string>
+    <string name="address">地址(用户购买后才显示)</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="open_weixin">正在打开微信...</string>
+    <string name="login_failed">登录失败</string>
+    <string name="write_food_type">请填写美食类别</string>
+    <string name="write_reason">请填写推荐理由</string>
+    <string name="write_food_detail">请填写美食详情</string>
+    <string name="write_shop_name">请填写店名</string>
+    <string name="write_address">请填写美食地址并在地图上标注</string>
+    <string name="write_price">请填写查看这条信息的价格</string>
+    <string name="not_login">点击登录</string>
+    <string name="slogan">「问我」 让经验帮你赚钱</string>
+    <string name="card_share">问我∙美食--美食卡片分享</string>
+    <string name="ssdk_qq">QQ</string>
+    <string name="ssdk_qzone">QQ空间</string>
+    <string name="ssdk_sinaweibo">新浪微博</string>
+    <string name="ssdk_tencentweibo">腾讯微博</string>
+    <string name="ssdk_wechat">微信</string>
+    <string name="ssdk_wechatfavorite">微信收藏</string>
+    <string name="ssdk_wechatmoments">朋友圈</string>
+    <string name="save_to_local">保存图片</string>
+    <string name="saved">图片已保存</string>
+    <string name="ready_to_share">正在分享...</string>
+    <string name="share_complete">分享成功</string>
+    <string name="share_cancel">分享取消</string>
+    <string name="share_erroe">分享出错</string>
+    <string name="select_pic">选择图片</string>
+    <string name="more">更多</string>
+    <string name="max_tag_notice">最多只能输入三个标签</string>
+    <string name="title_is_empty">标签不能为空</string>
+    <string name="reason_is_empty">推荐理由不能为空</string>
+    <string name="detail_is_empty">信息详情不能为空</string>
+    <string name="shop_is_empty">店名不能为空</string>
+    <string name="address_is_empty">地址不能为空</string>
+    <string name="price_is_empty">价格不能为空</string>
+    <string name="upload_complete">图片上传完成</string>
+    <string name="upload_ask_complete">发布成功</string>
+    <string name="upload_ask_failed">发布失败</string>
+    <string name="confirm_back">确认返回</string>
+    <string name="confirm_back_detail">你有未发布的内容,是否保存已编辑内容?</string>
+    <string name="save">保存</string>
+    <string name="give_up">放弃</string>
+    <string name="delete_ing">正在删除...</string>
+    <string name="not_send">未发布信息</string>
+    <string name="not_send_detail">你有未发布的内容,是否载入?</string>
+    <string name="confirm_logout">是否退出当前帐号?</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="delete_success">下架成功</string>
+    <string name="delete_failed">下架失败</string>
+    <string name="pre_pay_failed">获取支付信息出错</string>
+    <string name="open_weixin_pay">正在打开微信支付</string>
+    <string name="weixin_pay_complete">微信支付成功</string>
+    <string name="weixin_pay_cancel">支付取消</string>
+    <string name="weixin_pay_error">支付出错</string>
+    <string name="pay_ing">正在购买</string>
+    <string name="auth_invalid">授权已过期,请重新登录</string>
+    <string name="request_login_title">登录问我</string>
+    <string name="request_login_message">登录问我后才能继续操作</string>
+    <string name="request_login_agree">登录问我</string>
+    <string name="request_login_disagree">我就随便看看</string>
+    <string name="under_hint">该信息已下架,下架理由:</string>
+    <string name="reason_not_empty">下架理由不能为空哦</string>
+    <string-array name="pic_items">
+        <item>从相册选取</item>
+        <item>打开相机</item>
+    </string-array>
+
+    <string name="add_tips">售卖你的经验，不经意间早餐加了一个茶叶蛋
+发个朋友圈也能赚钱      ，   这么简单？试试，也许还能赚大钱。
+
+a．分享的内容中，店名和地址是被遮挡的，其他用户必须付费成功后才能查看。
+b．吸引他人付费查看信息的关键在于推荐理由和信息详情，所以一定要有情怀，有逼格，有技巧，有深度。当然也别暴露了店名和地址哦，这很关键。
+c．信息发布后，初始都是免费查看，必须累积到10次查看，才开始付费查看。</string>
+    <string name="price_tips"> 合理的设置查看价格，是获得最大收益的保障；\n<br />
+            每条信息分享成功后，开始都是免费查看；\n<br />
+            必须累积到10个<font color="red">想吃</font>或者<font color="red">查看</font>后，才能开始付费查看。</string>
+    <string name="price_title">请填写这条信息的<font color="red">查看价格</font>吧:</string>
+    <string name="reason_title">给一个让大家相信你的<font color="red">理由</font>吧:</string>
+    <string name="shop_title">请输入这家<font color="red">店</font>的名字:</string>
+    <string name="detail_title">请告诉我们一些<font color="red">详细信息</font>:</string>
+    <string name="reason_tip_1">eg:好吃到灵魂颤抖的火锅。</string>
+    <string name="reason_tip_2">eg:好吃的忘不掉味道。</string>
+    <string name="reason_tip_3">eg:你要相信一个吃了好多年的老司机。</string>
+    <string name="reason_tip_4">eg:排队排到天荒地老,差点就海枯石烂了!</string>
+</resources>
