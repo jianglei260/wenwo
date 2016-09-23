@@ -8,6 +8,8 @@ import com.facebook.common.logging.FLog;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.myworld.wenwo.data.repository.UserRepository;
 
+import net.youmi.android.AdManager;
+
 import im.fir.sdk.FIR;
 
 /**
@@ -25,7 +27,7 @@ public class WenWoApplication extends Application {
         instance = this;
 //        ImagePipelineConfig pipelineConfig = ImagePipelineConfig.newBuilder(this).set.build();
         Fresco.initialize(this);
-
+        AdManager.getInstance(this).init("16fa0c2db29bf132", "1aff57606ea5d0ee", true, true);
 //        FLog.setMinimumLoggingLevel(FLog.VERBOSE);
         Config.USERNAME = UserRepository.getInstance().getUserFromLocal(this);
         FIR.init(this);

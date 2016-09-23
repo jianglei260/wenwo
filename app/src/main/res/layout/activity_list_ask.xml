@@ -28,7 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:leftImage="@drawable/back"
-            app:titleText="我的订单" />
+            app:titleText="我的订单"
+            android:background="@color/bar_background_color"
+            android:elevation="@dimen/dp1"/>
 
         <FrameLayout
             android:layout_width="match_parent"

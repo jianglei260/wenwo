@@ -6,8 +6,11 @@
       <module fileurl="file://$PROJECT_DIR$/annotation/annotation.iml" filepath="$PROJECT_DIR$/annotation/annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/designtool/designtool.iml" filepath="$PROJECT_DIR$/designtool/designtool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leplay/leplay.iml" filepath="$PROJECT_DIR$/leplay/leplay.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/music/music.iml" filepath="$PROJECT_DIR$/music/music.iml" />
+      <module fileurl="file://$PROJECT_DIR$/measuretool/measuretool.iml" filepath="$PROJECT_DIR$/measuretool/measuretool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/upgradetool/upgradetool.iml" filepath="$PROJECT_DIR$/upgradetool/upgradetool.iml" />
       <module fileurl="file://$PROJECT_DIR$/wenwo.iml" filepath="$PROJECT_DIR$/wenwo.iml" />
     </modules>
   </component>

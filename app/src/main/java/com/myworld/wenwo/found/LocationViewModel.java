@@ -23,9 +23,11 @@ public class LocationViewModel extends ListItemViewModel {
     public ObservableField<String> dsiatanceSelected = new ObservableField<>();
     public ObservableField<String> dsiatance0 = new ObservableField<>();
     public ObservableField<String> dsiatance1 = new ObservableField<>();
-    public int[] ranges = new int[]{500, 2000, Integer.MAX_VALUE};
-    public static final String DISTANCE500M = "500m";
+    public ObservableField<String> dsiatance2 = new ObservableField<>();
+    public int[] ranges = new int[]{1000, 2000, 10000, Integer.MAX_VALUE};
+    public static final String DISTANCE1KM = "1km";
     public static final String DISTANCE2KM = "2km";
+    public static final String DISTANCE10KM = "10km";
     public static final String DISTANCEALL = "所有信息";
     private AskViewModel askViewModel;
     public ReplyCommand dsiatanceSelectedClick = new ReplyCommand(new Action0() {
@@ -48,6 +50,14 @@ public class LocationViewModel extends ListItemViewModel {
             askViewModel.refresh();
         }
     });
+    public ReplyCommand dsiatance2Click = new ReplyCommand(new Action0() {
+        @Override
+        public void call() {
+            visible.set(false);
+            updateDistance(dsiatance2.get());
+            askViewModel.refresh();
+        }
+    });
     public ReplyCommand dsiatance1Click = new ReplyCommand(new Action0() {
         @Override
         public void call() {
@@ -67,23 +77,33 @@ public class LocationViewModel extends ListItemViewModel {
 
     public void updateDistance(String text) {
         switch (text) {
-            case DISTANCE500M:
+            case DISTANCE1KM:
                 dsiatance0.set(DISTANCE2KM);
-                dsiatance1.set(DISTANCEALL);
-                dsiatanceSelected.set(DISTANCE500M);
+                dsiatance1.set(DISTANCE10KM);
+                dsiatance2.set(DISTANCEALL);
+                dsiatanceSelected.set(DISTANCE1KM);
                 Config.range = ranges[0];
                 break;
             case DISTANCE2KM:
-                dsiatance0.set(DISTANCE500M);
-                dsiatance1.set(DISTANCEALL);
+                dsiatance0.set(DISTANCE1KM);
+                dsiatance1.set(DISTANCE10KM);
+                dsiatance2.set(DISTANCEALL);
                 dsiatanceSelected.set(DISTANCE2KM);
                 Config.range = ranges[1];
                 break;
-            case DISTANCEALL:
-                dsiatance0.set(DISTANCE500M);
+            case DISTANCE10KM:
+                dsiatance0.set(DISTANCE1KM);
                 dsiatance1.set(DISTANCE2KM);
-                dsiatanceSelected.set(DISTANCEALL);
+                dsiatance2.set(DISTANCEALL);
+                dsiatanceSelected.set(DISTANCE10KM);
                 Config.range = ranges[2];
+                break;
+            case DISTANCEALL:
+                dsiatance0.set(DISTANCE1KM);
+                dsiatance1.set(DISTANCE2KM);
+                dsiatance2.set(DISTANCE10KM);
+                dsiatanceSelected.set(DISTANCEALL);
+                Config.range = ranges[3];
                 break;
         }
     }

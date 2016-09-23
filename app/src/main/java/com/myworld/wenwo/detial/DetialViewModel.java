@@ -37,6 +37,7 @@ import com.myworld.wenwo.login.LoginActivity;
 import com.myworld.wenwo.utils.ObservableUtil;
 import com.myworld.wenwo.view.widget.DebaseDialog;
 import com.myworld.wenwo.view.widget.WenwoDialog;
+import com.myworld.wenwo.vipcard.VipCardDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,6 +60,7 @@ public class DetialViewModel extends AskItemViewModel {
     public ObservableField<String> address = new ObservableField<>();
     public ObservableField<String> detial = new ObservableField<>();
     public ObservableField<String> userName = new ObservableField<>();
+    public ObservableField<String> vip = new ObservableField<>();
     public ObservableBoolean finish = new ObservableBoolean(false);
     public ObservableBoolean haved = new ObservableBoolean(false);
     public ObservableBoolean isOwn = new ObservableBoolean(false);
@@ -77,6 +79,13 @@ public class DetialViewModel extends AskItemViewModel {
             return 1;
         }
     };
+    public ReplyCommand vipClick =new ReplyCommand(new Action0() {
+        @Override
+        public void call() {
+            VipCardDialog dialog=new VipCardDialog(context,askMe);
+            dialog.show();
+        }
+    });
     public ReplyCommand buyClick = new ReplyCommand(new Action0() {
         @Override
         public void call() {
@@ -213,6 +222,9 @@ public class DetialViewModel extends AskItemViewModel {
                 e.printStackTrace();
             }
         }
+        if (!TextUtils.isEmpty(askMe.getVipCardContent())){
+            vip.set("res:///"+R.drawable.vip);
+        }
         isOwn.set(askMe.getCreateBy().equals(Config.USERNAME));
         userName.set(askMe.getCreateByName());
         underReason.set(askMe.getAskDefault());
@@ -222,6 +234,7 @@ public class DetialViewModel extends AskItemViewModel {
         liked.set(askMe.getLiked() > 0);
         likeNum.set(String.valueOf(askMe.getLikeNum()));
         shop.set(askMe.getShopName());
+
         if (askMe.getAskPrice() <= 0)
             price.set(context.getString(R.string.no_charge));
         else

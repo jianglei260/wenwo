@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="cardViewModel"
+            type="com.myworld.wenwo.vipcard.VipCardViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_overlay">
+
+        <RelativeLayout
+            android:id="@+id/card_layout"
+            android:layout_width="match_parent"
+            android:layout_height="226dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/card_bg1">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="272dp"
+                android:layout_height="64dp"
+                android:layout_centerVertical="true"
+                bind:uri="@{cardViewModel.cardImage}"
+                android:scaleType="fitCenter"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="112dp"
+                android:layout_height="32dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="4dp"
+                android:background="@color/white"
+                android:paddingBottom="4dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="4dp"
+                android:src="@drawable/wenwo_bg1" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

@@ -8,6 +8,7 @@ import android.databinding.ObservableFloat;
 import android.databinding.ObservableInt;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import com.kelin.mvvmlight.base.ViewModel;
 import com.kelin.mvvmlight.command.ReplyCommand;
@@ -23,6 +24,10 @@ import com.myworld.wenwo.main.MainActivity;
 import com.myworld.wenwo.shared.SharedActivity;
 import com.myworld.wenwo.web.WebActivity;
 
+import java.util.HashMap;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import rx.functions.Action0;
@@ -126,6 +131,23 @@ public class UserViewModel implements ViewModel {
         oks.setImageUrl("http://www.wenwobei.com/img/logo.jpg");//确保SDcard下面存在此张图片
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl("http://www.wenwobei.com");
+        oks.setCallback(new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+            }
+
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+                Log.d("error","code= "+i+throwable.getMessage());
+                throwable.printStackTrace();
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+
+            }
+        });
         oks.show(context);
     }
 

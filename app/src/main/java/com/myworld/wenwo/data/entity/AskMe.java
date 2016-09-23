@@ -69,6 +69,24 @@ public class AskMe extends RealmObject {
     private String askDefault;
     private int score;
     private int lookNum;
+    private String vipCardContent;
+    private String vipCardImage;
+
+    public String getVipCardContent() {
+        return vipCardContent;
+    }
+
+    public void setVipCardContent(String vipCardContent) {
+        this.vipCardContent = vipCardContent;
+    }
+
+    public String getVipCardImage() {
+        return vipCardImage;
+    }
+
+    public void setVipCardImage(String vipCardImage) {
+        this.vipCardImage = vipCardImage;
+    }
 
     public int getLookNum() {
         return lookNum;

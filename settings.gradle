@@ -1,1 +1,1 @@
-include ':app', ':compiler', ':annotation', ':music', ':library', ':CardStack'
+include ':app', ':compiler', ':annotation', ':library', ':CardStack', ':designtool', ':measuretool', ':upgradetool', ':leplay'

@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -35,6 +37,7 @@ import com.myworld.wenwo.found.FoundFragment;
 import com.myworld.wenwo.like.LikeFragment;
 import com.myworld.wenwo.login.CheckForLogin;
 import com.myworld.wenwo.user.UserActivity;
+import com.myworld.wenwo.utils.ViewServer;
 import com.myworld.wenwo.view.widget.TitleBar;
 import com.myworld.wenwo.view.widget.WenwoDialog;
 
@@ -52,6 +55,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private LikeFragment likeFragment;
     private TitleBar titleBar;
     private BottomNavigationBar bottomNavigationBar;
+    private ViewServer viewServer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,16 +82,20 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         getFragmentManager().beginTransaction().add(R.id.container, likeFragment).commit();
         getFragmentManager().beginTransaction().add(R.id.container, foundFragment).commit();
         EventBus.getInstance().regist(this);
-//        Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-//            @Override
-//            public void uncaughtException(Thread thread, Throwable ex) {
-//                thread.interrupt();
-//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-////        Intent intent = new Intent(this, Main2Activity.class);
-//        startActivity(intent);
+        viewServer = ViewServer.get(this);
+        viewServer.addWindow(this);
+        try {
+            viewServer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 1234);
+            }
+        }
     }
 
     public void addDoubleClickListener(GestureDetector.OnDoubleTapListener listener) {
@@ -118,7 +126,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     protected void onResume() {
-
         super.onResume();
     }
 
@@ -130,9 +137,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
             ImageView addImageView = new ImageView(this);
             addImageView.setImageResource(R.drawable.ic_add);
             int padding = getResources().getDimensionPixelSize(R.dimen.badge_top_margin);
-            addImageView.setPadding(padding, padding, padding, padding);
+            addImageView.setPadding(padding, 0, padding, padding);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             params.weight = 1;
+            tabContainer.setPadding(0, getResources().getDimensionPixelSize(R.dimen.dp_6), 0, 0);
             tabContainer.addView(addImageView, 1, params);
             addImageView.setOnClickListener(this);
         } catch (Exception e) {
@@ -176,6 +184,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     protected void onDestroy() {
+//        viewServer.stop();
         super.onDestroy();
         AskMeRepository.getInstance().updateDB();
         Log.d("mainActivity", "onDestory");

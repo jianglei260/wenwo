@@ -12,13 +12,15 @@
         android:layout_height="wrap_content"
         app:leftImage="@drawable/user_center"
         app:rightImage="@drawable/search"
-        app:rightImageVisible="true"></com.myworld.wenwo.view.widget.TitleBar>
+        app:rightImageVisible="true"
+        android:elevation="1dp"></com.myworld.wenwo.view.widget.TitleBar>
 
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bottom_navigation_bar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+         />
 
     <FrameLayout
         android:id="@+id/container"

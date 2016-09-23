@@ -19,7 +19,7 @@
         android:id="@+id/activity_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bar_background_color"
+        android:background="@color/found_background_color"
         android:orientation="vertical"
         tools:context="com.myworld.wenwo.setting.SettingsActivity">
 
@@ -27,6 +27,8 @@
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/bar_background_color"
+            android:elevation="1dp"
             app:leftImage="@drawable/back"
             app:titleText="美食攻略" />
 
@@ -49,8 +51,7 @@
                     android:layout_height="match_parent"
                     bind:itemView="@{viewModel.itemView}"
                     bind:items="@{viewModel.items}"
-                    bind:layoutManager="@{LayoutManagers.linear()}"
-                    />
+                    bind:layoutManager="@{LayoutManagers.linear()}" />
             </android.support.v4.widget.SwipeRefreshLayout>
 
             <com.myworld.wenwo.view.widget.LoaddingView

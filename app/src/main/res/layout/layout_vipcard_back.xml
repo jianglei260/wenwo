@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.myworld.wenwo.vipcard.VipCardViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_overlay">
+
+        <RelativeLayout
+            android:id="@+id/card_layout"
+            android:layout_width="match_parent"
+            android:layout_height="226dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/card_bg2">
+
+            <ImageView
+                android:id="@+id/tip_image"
+                android:layout_width="40dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/card_tip" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:layout_marginTop="36dp"
+                android:layout_toRightOf="@id/tip_image"
+                android:padding="16dp"
+                android:text="@{viewModel.cardContent}" />
+
+            <ImageView
+                android:layout_width="112dp"
+                android:layout_height="32dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="4dp"
+                android:background="@color/white"
+                android:paddingBottom="4dp"
+                android:paddingRight="10dp"
+                android:paddingTop="4dp"
+                android:scaleType="fitEnd"
+                android:src="@drawable/wenwo_bg2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="10dp"
+                android:text="★最终解释权归「问我」所有"
+                android:textColor="@color/white"
+                android:textSize="8sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

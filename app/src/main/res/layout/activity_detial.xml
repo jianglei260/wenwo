@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -24,11 +25,14 @@
         tools:context="com.myworld.wenwo.detial.DetialActivity">
 
 
+
+
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/title_bar">
+            android:layout_below="@id/title_bar"
+            android:background="@color/found_background_color">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -204,8 +208,8 @@
                     android:layout_below="@id/header"
                     android:background="@color/black_overlay"
                     android:gravity="center_vertical"
-                    android:text="@{@string/under_hint+detialViewModel.underReason}"
                     android:paddingLeft="8dp"
+                    android:text="@{@string/under_hint+detialViewModel.underReason}"
                     android:textColor="@color/white"
                     android:visibility="@{TextUtils.isEmpty(detialViewModel.underReason)?View.GONE:View.VISIBLE}" />
             </RelativeLayout>
@@ -215,11 +219,26 @@
             android:id="@+id/title_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/bar_background_color"
+            android:elevation="1dp"
             app:layout_behavior="com.myworld.wenwo.view.widget.TitlebarBehavior"
             app:leftImage="@drawable/back"
             app:rightImage="@drawable/ic_more_png"
             app:rightImageVisible="@{detialViewModel.isOwn}"
             app:titleText="@{detialViewModel.title[0]}" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="right|top"
+            fresco:roundAsCircle="true"
+            android:layout_marginTop="56dp"
+            bind:image_uri="@{detialViewModel.vip}"
+            android:background="@drawable/shape_vip_bg"
+            fresco:actualImageScaleType="fitCenter"
+            bind:clickCommand="@{detialViewModel.vipClick}"
+            android:elevation="2dp"
+            android:layout_marginRight="8dp"
+            android:visibility="@{TextUtils.isEmpty(detialViewModel.vip)?View.GONE:View.VISIBLE}"/>
     </android.support.design.widget.CoordinatorLayout>
 </layout>
 

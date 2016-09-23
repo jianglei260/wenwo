@@ -62,6 +62,17 @@ public class LikeFragment extends Fragment implements AskViewModel.AskDataInterf
         return AskMeRepository.getInstance().getLikedListFromRemote(Config.USERNAME, 0);//// TODO: 16/7/28;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden)
+            return;
+        if (Config.like_state_changed) {
+            Config.like_state_changed = false;
+            askViewModel.refresh();
+        }
+    }
+
     @OnEvent("notifyItemChanged")
     public void notifyItemChanged(int position) {
         if (position >= 0) {

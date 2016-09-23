@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,6 +21,9 @@ public class WebActivity extends AppCompatActivity {
     private TitleBar titleBar;
     private ProgressBar progressBar;
     private String url, title;
+    private WebChromeClient.FileChooserParams fileChooserParams;
+    private ValueCallback<Uri[]> valueCallback;
+    private static final int REQUEST_FILE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,6 @@ public class WebActivity extends AppCompatActivity {
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAllowContentAccess(true);
-        webView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -47,6 +50,14 @@ public class WebActivity extends AppCompatActivity {
                 }
             }
 
+            @Override
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+                WebActivity.this.valueCallback = filePathCallback;
+                WebActivity.this.fileChooserParams = fileChooserParams;
+                Intent intent = fileChooserParams.createIntent();
+                startActivityForResult(intent, REQUEST_FILE);
+                return true;
+            }
         });
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -76,6 +87,13 @@ public class WebActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_FILE) {
+            valueCallback.onReceiveValue(new Uri[]{data.getData()});
+        }
     }
 
     public static void startWebActivity(Context context, String url, String title) {

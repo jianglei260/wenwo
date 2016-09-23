@@ -13,8 +13,11 @@
             <option value="$PROJECT_DIR$/annotation" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/compiler" />
+            <option value="$PROJECT_DIR$/designtool" />
+            <option value="$PROJECT_DIR$/leplay" />
             <option value="$PROJECT_DIR$/library" />
-            <option value="$PROJECT_DIR$/music" />
+            <option value="$PROJECT_DIR$/measuretool" />
+            <option value="$PROJECT_DIR$/upgradetool" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

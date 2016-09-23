@@ -2,6 +2,7 @@ package com.myworld.wenwo.splash;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -11,9 +12,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.baidu.location.BDLocation;
@@ -22,14 +27,23 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.myworld.wenwo.R;
 import com.myworld.wenwo.application.Config;
+import com.myworld.wenwo.data.repository.AskMeRepository;
 import com.myworld.wenwo.main.MainActivity;
 import com.myworld.wenwo.update.AppUpdateTool;
+import com.myworld.wenwo.utils.ObservableUtil;
 import com.myworld.wenwo.view.widget.MapViewWrapper;
+
+import net.youmi.android.normal.spot.SplashViewSettings;
+import net.youmi.android.normal.spot.SpotListener;
+import net.youmi.android.normal.spot.SpotManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.StreamHandler;
+
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -38,25 +52,42 @@ import java.util.logging.StreamHandler;
 public class SplashActivity extends AppCompatActivity {
     int[] imageRes = new int[]{R.drawable.splash_hotpot, R.drawable.splash_noodels, R.drawable.splash_sushi};
     public static final int DELAY_TIME = 2000;
+    private FrameLayout container;
+    private ImageView splashImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        ImageView splashImage = (ImageView) findViewById(R.id.splash_image);
+        container = (FrameLayout) findViewById(R.id.container);
+        splashImage = (ImageView) findViewById(R.id.splash_image);
         splashImage.setImageResource(imageRes[((int) (Math.random() * 10)) % 3]);
+
         checkPermission();
     }
 
     public void start() {
+//        startAd();
+        realSplash();
+    }
+
+    public void realSplash() {
+//        ImageView splaImageView = new ImageView(this);
+//        splaImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+//        splaImageView.setVisibility(View.VISIBLE);
+        splashImage.setImageResource(imageRes[((int) (Math.random() * 10)) % 3]);
+//        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+//                startAd();
             }
         }, DELAY_TIME);
+
         final LocationClient client = new LocationClient(this);
         initLocation(client);
         client.registerLocationListener(new BDLocationListener() {
@@ -71,6 +102,66 @@ public class SplashActivity extends AppCompatActivity {
         });
         client.start();
         checkUpdate();
+        addUser();
+    }
+
+    public void startAd() {
+        realSplash();
+//        SplashViewSettings splashViewSettings = new SplashViewSettings();
+//        splashViewSettings.setTargetClass(MainActivity.class);
+//        splashViewSettings.setSplashViewContainer(container);
+//        SpotManager.getInstance(this).showSplash(this, splashViewSettings, new SpotListener() {
+//            @Override
+//            public void onShowSuccess() {
+////                realSplash();
+//            }
+//
+//            @Override
+//            public void onShowFailed(int i) {
+////                realSplash();
+//            }
+//
+//            @Override
+//            public void onSpotClosed() {
+////                realSplash();
+//            }
+//
+//            @Override
+//            public void onSpotClicked(boolean b) {
+////                realSplash();
+//            }
+//        });
+
+    }
+
+    public void addUser() {
+        ObservableUtil.runOnUI(new Observable.OnSubscribe<Boolean>() {
+            @Override
+            public void call(Subscriber<? super Boolean> subscriber) {
+                if (!TextUtils.isEmpty(Config.USERNAME))
+                    subscriber.onNext(AskMeRepository.getInstance().addLookUser(Config.USERNAME));
+                else {
+                    TelephonyManager manager = (TelephonyManager) getApplication().getSystemService(Context.TELEPHONY_SERVICE);
+                    subscriber.onNext(AskMeRepository.getInstance().addLookUser(manager.getSubscriberId()));
+
+                }
+            }
+        }, new Subscriber<Boolean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Boolean aBoolean) {
+
+            }
+        });
     }
 
     public void checkUpdate() {

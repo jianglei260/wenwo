@@ -42,6 +42,8 @@ public class AskLocalDataSource implements AskMeDataSource {
     @Override
     public List<AskMe> getAllAsk(int type, int page, int size) {
         List<AskMe> results = Realm.getDefaultInstance().where(AskMe.class).findAll();
+        if (results.size() > 30)
+            return copyResult(results.subList(0, 29));
         return copyResult(results);
     }
 
@@ -106,6 +108,11 @@ public class AskLocalDataSource implements AskMeDataSource {
     public boolean sendAsk(AskMe askMe, String userName) {
         saveOrUpdate(askMe);
         return true;
+    }
+
+    @Override
+    public boolean autoSendAsk(AskMe askMe, String userName) {
+        return false;
     }
 
 
@@ -201,6 +208,11 @@ public class AskLocalDataSource implements AskMeDataSource {
 
     @Override
     public boolean addCardDownNum(String cardId) {
+        return false;
+    }
+
+    @Override
+    public boolean addLookUser(String userId) {
         return false;
     }
 

@@ -24,7 +24,7 @@
         android:id="@+id/activity_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bar_background_color"
+        android:background="@color/found_background_color"
         tools:context="com.myworld.wenwo.detial.DetialActivity">
 
         <com.myworld.wenwo.view.widget.TitleBar
@@ -34,12 +34,13 @@
             app:leftImage="@drawable/back"
             app:rightImage="@drawable/ic_setting"
             app:rightImageVisible="true"
-            app:titleText="个人中心" />
+            app:titleText="个人中心"
+            android:background="@color/bar_background_color"/>
 
         <RelativeLayout
             android:id="@+id/header_layout"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="200dp"
             android:layout_below="@id/title_bar"
             android:background="@color/black_overlay">
 
@@ -48,20 +49,20 @@
                 android:layout_height="match_parent"
                 bind:image_uri="@{userViewModel.imageUrl}"
                 fresco:actualImageScaleType="centerCrop"
-                fresco:overlayImage="@color/black_overlay" />
+                fresco:overlayImage="@color/bg_mask" />
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/user_image"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="30dp"
                 bind:clickCommand="@{userViewModel.imageClick}"
                 fresco:actualImageScaleType="centerCrop"
                 fresco:placeholderImage="@drawable/ic_head_default"
                 fresco:roundAsCircle="true"
                 fresco:roundingBorderColor="@color/white"
-                fresco:roundingBorderWidth="4dp" />
+                fresco:roundingBorderWidth="2dp" />
 
             <TextView
                 android:id="@+id/user_name"
@@ -78,8 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/user_name"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -100,7 +101,7 @@
                         style="@style/whiteText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:text="想吃" />
                 </LinearLayout>
 
@@ -122,7 +123,7 @@
                         style="@style/whiteText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:text="发布" />
                 </LinearLayout>
 
@@ -143,7 +144,7 @@
                         style="@style/whiteText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:gravity="center"
                         android:text="受益" />
                 </LinearLayout>
@@ -154,103 +155,61 @@
         <RelativeLayout
             android:id="@+id/bought_layout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:layout_below="@id/header_layout"
             android:layout_marginTop="8dp"
             android:background="@android:color/white"
             bind:clickCommand="@{userViewModel.havedClick}">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="32dp"
+                style="@style/user_center_item_title"
                 android:drawableLeft="@drawable/ic_bought_svg"
-                android:drawablePadding="8dp"
-                android:text="我的订单"
-                android:textSize="16sp" />
+                android:text="我的订单" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="40dp"
-                android:text="@{String.valueOf(userViewModel.buyNum)}"
-                android:textSize="18sp" />
+                style="@style/user_center_item_text"
+                android:text="@{String.valueOf(userViewModel.buyNum)}" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ic_detail"
-                android:tint="@color/gray" />
+            <ImageView style="@style/user_center_item_right" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/invite_layout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:layout_below="@id/bought_layout"
             android:layout_marginTop="16dp"
             android:background="@android:color/white"
             bind:clickCommand="@{userViewModel.shareToClick}">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="32dp"
+                style="@style/user_center_item_title"
                 android:drawableLeft="@drawable/ic_invite"
-                android:drawablePadding="8dp"
-                android:text="邀请好友使用"
-                android:textSize="16sp" />
+                android:text="邀请好友使用" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ic_detail"
-                android:tint="@color/gray" />
+            <ImageView style="@style/user_center_item_right" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/callback_layout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:layout_below="@id/invite_layout"
             android:layout_marginTop="1dp"
             android:background="@android:color/white"
             bind:clickCommand="@{userViewModel.callbackClick}">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="32dp"
+                style="@style/user_center_item_title"
                 android:drawableLeft="@drawable/ic_callback"
-                android:drawablePadding="8dp"
-                android:text="给小问提意见"
-                android:textSize="16sp" />
+                android:text="给小问提意见" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ic_detail"
-                android:tint="@color/gray" />
+            <ImageView style="@style/user_center_item_right" />
         </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:layout_below="@id/callback_layout"
             android:layout_marginTop="16dp"
             android:background="@color/white"

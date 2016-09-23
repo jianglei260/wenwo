@@ -31,7 +31,8 @@
             fresco:placeholderImage="@mipmap/ic_launcher"
             fresco:roundAsCircle="true"
             fresco:roundingBorderColor="@color/gray"
-            fresco:roundingBorderWidth="1dp" />
+            fresco:roundingBorderWidth="1dp"
+            style="@style/ask_item_desc_text"/>
 
         <TextView
             android:id="@+id/desc"
@@ -44,7 +45,8 @@
             android:text="@{viewModel.desc}"
             android:gravity="center_vertical"
             android:maxLines="2"
-            android:ellipsize="end"/>
+            android:ellipsize="end"
+            style="@style/ask_item_desc_text"/>
 
         <LinearLayout
             android:id="@+id/tag_layout"
@@ -61,45 +63,21 @@
                 android:src="@drawable/tag_infor" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/shape_edittext_border"
-                android:paddingBottom="4dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="4dp"
                 android:text="@{viewModel.title[0]}"
-                android:textColor="@color/item_title_color"
-                bind:clickCommand="@{viewModel.tag0Click}" />
+                bind:clickCommand="@{viewModel.tag0Click}"
+                style="@style/ask_item_tag_text"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/shape_edittext_border"
-                android:paddingBottom="4dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="4dp"
                 android:text="@{viewModel.title.size()>1?viewModel.title[1]:@string/app_name}"
-                android:textColor="@color/item_title_color"
                 android:visibility="@{viewModel.title.size()>1?View.VISIBLE:View.GONE}"
-                bind:clickCommand="@{viewModel.tag1Click}" />
+                bind:clickCommand="@{viewModel.tag1Click}"
+                style="@style/ask_item_tag_text"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/shape_edittext_border"
-                android:paddingBottom="4dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="4dp"
                 android:text="@{viewModel.title.size()>2?viewModel.title[2]:@string/app_name}"
-                android:textColor="@color/item_title_color"
                 android:visibility="@{viewModel.title.size()>2?View.VISIBLE:View.GONE}"
-                bind:clickCommand="@{viewModel.tag2Click}" />
+                bind:clickCommand="@{viewModel.tag2Click}"
+                style="@style/ask_item_tag_text"/>
 
         </LinearLayout>
 
@@ -113,7 +91,7 @@
             android:drawablePadding="4dp"
             android:gravity="bottom"
             android:text="@{viewModel.likeNum}"
-            android:textColor="@{viewModel.liked?(int)@color/colorPrimary:(int)@color/item_title_color}"
+            android:textColor="@{viewModel.liked?(int)@color/colorPrimary:(int)@color/like_num_color}"
             bind:clickCommand="@{viewModel.likeClick}" />
 
         <TextView

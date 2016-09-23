@@ -92,7 +92,9 @@ public class AppUpdateTool {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Toast.makeText(context, "check update failed", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+                if (callback != null)
+                    callback.onFailure();
             }
 
             @Override
@@ -200,6 +202,8 @@ public class AppUpdateTool {
     }
 
     public interface UpdateCallback {
-        public void needUpdate(boolean needUpdate, VersionInfo versionInfo);
+        void needUpdate(boolean needUpdate, VersionInfo versionInfo);
+
+        void onFailure();
     }
 }

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'realm-android'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'upgrade'
 //apply plugin: 'com.antfortune.freeline'
 
 android {
@@ -11,10 +12,11 @@ android {
         applicationId "com.myworld.wenwo"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 2
-        versionName "1.0-alpha"
+        versionCode 4
+        versionName "1.0-alpha2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     signingConfigs {
         release {
             storeFile file('/Users/jianglei/myworld.jks')
@@ -50,9 +52,33 @@ android {
     dataBinding {
         enabled = true
     }
+    testOptions{
+        unitTests.returnDefaultValues = true
+    }
+
 //    freeline {
 //        hack true
 //    }
+}
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url uri('../repo')
+        }
+        maven {
+            url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
+        }
+    }
+    dependencies {
+        classpath 'com.myworld.wenwo.upgrade:upgradetool:1.0.2'
+    }
+}
+upgrade{
+    versionCode android.defaultConfig.versionCode
+    versionName android.defaultConfig.versionName
+    versionDesc "1.优化了界面。\n2.修复了部分bug"
+    apkPath "/app/build/outputs/apk/app-release.apk"
 }
 //plugin is too old http://tools.android.com/tech-docs/new-build-system
 //library version
@@ -97,5 +123,11 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     compile files('libs/ShareSDK-QQ-2.7.4.jar')
     compile project(':CardStack')
-//    compile 'com.antfortune.freeline:runtime:0.6.0'
+    //    compile 'com.antfortune.freeline:runtime:0.6.0'
+    compile files('libs/ShareSDK-SinaWeibo-2.7.4.jar')
+//    compile files('libs/YoumiSdk_v6.4.4_2016-09-08.jar')
+    testCompile 'com.squareup.okhttp3:okhttp:3.3.0'
+    testCompile files('libs/jsoup-1.9.2.jar')
+    testCompile files('libs/json-20160212-sources.jar')
+    testCompile "org.mockito:mockito-core:1.9.5"
 }

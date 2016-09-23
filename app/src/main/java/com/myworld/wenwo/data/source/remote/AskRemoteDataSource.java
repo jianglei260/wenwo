@@ -109,8 +109,22 @@ public class AskRemoteDataSource implements AskMeDataSource {
             AskMe result = service.sendAsk(askMe.getCreateByName(), askMe.getObjectId(), askMe.getAskType(), askMe.getAskPrice(), askMe.getGeoX(), askMe.getGeoY()
                     , askMe.getAskPosition(), askMe.getAskReason(), askMe.getAskContentShow(), askMe.getAskTagStr(), askMe.getShopName(), askMe.getAskImage()).execute().body();
             if (result != null)
-                return TextUtils.isEmpty(result.getObjectId()) ? false : true;
+                return !TextUtils.isEmpty(result.getObjectId());
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean autoSendAsk(AskMe askMe, String userName) {
+        askMe.setCreateByName(userName);
+        try {
+            AskMe result = service.autoSendAsk(askMe.getCreateByName(), askMe.getObjectId(), askMe.getAskType(), askMe.getAskPrice(), askMe.getGeoX(), askMe.getGeoY()
+                    , askMe.getAskPosition(), askMe.getAskReason(), askMe.getAskContentShow(), askMe.getAskTagStr(), askMe.getShopName(), askMe.getAskImage(), askMe.getAskDefault()).execute().body();
+            if (result != null && result.getObjectId() != null)
+                return true;
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
@@ -125,7 +139,7 @@ public class AskRemoteDataSource implements AskMeDataSource {
             int havedFlag = root.getJSONObject("show").getInt("havedFlag");
             int foodLikeFlag = root.getJSONObject("show").getInt("foodLikeFlag");
             askMe.setLiked(foodLikeFlag);
-            askMe.setHaved(havedFlag > 0 ? true : false);
+            askMe.setHaved(havedFlag > 0);
             return askMe;
         } catch (Exception e) {
             e.printStackTrace();
@@ -277,6 +291,16 @@ public class AskRemoteDataSource implements AskMeDataSource {
     public boolean addCardDownNum(String cardId) {
         try {
             return service.addDownNum(cardId).execute().body();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addLookUser(String userId) {
+        try {
+            return service.addLookUser(userId).execute().body();
         } catch (IOException e) {
             e.printStackTrace();
         }

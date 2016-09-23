@@ -10,47 +10,51 @@ import java.util.List;
  */
 
 public interface AskMeDataSource {
-    public AskMe getAsk(String objectId);
+    AskMe getAsk(String objectId);
 
-    public List<AskMe> getAllAsk(int type, int page, int size);
+    List<AskMe> getAllAsk(int type, int page, int size);
 
-    public List<AskMe> getTagAsk(String userName, int type, int page, int size, String tag);
+    List<AskMe> getTagAsk(String userName, int type, int page, int size, String tag);
 
-    public List<AskMe> getLikedList(String userName, int page);
+    List<AskMe> getLikedList(String userName, int page);
 
-    public boolean like(String usrName, String objectId);
+    boolean like(String usrName, String objectId);
 
-    public boolean dislike(String usrName, String objectId);
+    boolean dislike(String usrName, String objectId);
 
-    public boolean sendAsk(AskMe askMe, String userName);
+    boolean sendAsk(AskMe askMe, String userName);
 
-    public AskMe getAskDetail(String userName, String objectId);
+    boolean autoSendAsk(AskMe askMe, String userName);
 
-    public List<AskMe> getMyAskList(String userName, int page);
+    AskMe getAskDetail(String userName, String objectId);
 
-    public List<AskMe> getHavedList(String userName, int page);
+    List<AskMe> getMyAskList(String userName, int page);
 
-    public boolean editAsk(AskMe askMe, String userName);
+    List<AskMe> getHavedList(String userName, int page);
 
-    public boolean deleteAsk(AskMe askMe, String reason, String userName);
+    boolean editAsk(AskMe askMe, String userName);
 
-    public List<BannerItem> getBanner();
+    boolean deleteAsk(AskMe askMe, String reason, String userName);
 
-    public List<BannerItem> getTopic(String userName);
+    List<BannerItem> getBanner();
 
-    public boolean addLook(String objectId);
+    List<BannerItem> getTopic(String userName);
 
-    public boolean debase(String objectId, String userName, String content);
+    boolean addLook(String objectId);
 
-    public String getAllTag();
+    boolean debase(String objectId, String userName, String content);
 
-    public String getCards(String userName);
+    String getAllTag();
 
-    public String getHostAddress();
+    String getCards(String userName);
 
-    public String getKeyWords(String keyword);
+    String getHostAddress();
 
-    public List<AskMe> searchAsk(String userName, int page, int size, String keyword);
+    String getKeyWords(String keyword);
 
-    public boolean addCardDownNum(String cardId);
+    List<AskMe> searchAsk(String userName, int page, int size, String keyword);
+
+    boolean addCardDownNum(String cardId);
+
+    boolean addLookUser(String userId);
 }

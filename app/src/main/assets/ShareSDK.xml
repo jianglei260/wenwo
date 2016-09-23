@@ -12,5 +12,13 @@
         Enable="true" Id="3" SortId="3" />
     <QQ AppId="1105509763" AppKey="GxHVU2xLmti47Z3x" Enable="true" Id="4" ShareByAppClient="true"
         SortId="4" />
+    <SinaWeibo
+        Id="5"
+        SortId="5"
+        AppKey="3700009834"
+        AppSecret="31e3a5d1bb5c782823a121f5684647c4"
+        RedirectUri="http://www.wenwobei.com"
+        ShareByAppClient="true"
+        Enable="true" />
 
 </DevInfor>

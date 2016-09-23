@@ -158,6 +158,7 @@ public class AskMeRepository implements AskMeDataSource {
 
     @Override
     public boolean like(String usrName, String objectId) {
+        Config.like_state_changed = true;
         if (remote.like(usrName, objectId)) {
             AskMe askMe = cache.get(objectId);
             askMe.setLikeNum(askMe.getLikeNum() + 1);
@@ -169,6 +170,7 @@ public class AskMeRepository implements AskMeDataSource {
 
     @Override
     public boolean dislike(String usrName, String objectId) {
+        Config.like_state_changed = true;
         if (remote.dislike(usrName, objectId)) {
             AskMe askMe = cache.get(objectId);
             askMe.setLikeNum(askMe.getLikeNum() - 1);
@@ -181,6 +183,11 @@ public class AskMeRepository implements AskMeDataSource {
     @Override
     public boolean sendAsk(AskMe askMe, String userName) {
         return remote.sendAsk(askMe, userName);
+    }
+
+    @Override
+    public boolean autoSendAsk(AskMe askMe, String userName) {
+        return remote.autoSendAsk(askMe, userName);
     }
 
     @Override
@@ -262,6 +269,11 @@ public class AskMeRepository implements AskMeDataSource {
     @Override
     public boolean addCardDownNum(String cardId) {
         return remote.addCardDownNum(cardId);
+    }
+
+    @Override
+    public boolean addLookUser(String userId) {
+        return remote.addLookUser(userId);
     }
 
 

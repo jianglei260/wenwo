@@ -2,6 +2,7 @@
     <string name="app_name">问我∙美食</string>
     <string name="default_load_text">正在加载</string>
     <string name="checking_update">正在检查更新</string>
+    <string name="checking_update_error">检查更新出错</string>
     <string name="text_haved">已购买</string>
     <string name="error">获取信息出错</string>
     <string name="mine">我发布的</string>
@@ -23,7 +24,7 @@
     <string name="write_address">请填写美食地址并在地图上标注</string>
     <string name="write_price">请填写查看这条信息的价格</string>
     <string name="not_login">点击登录</string>
-    <string name="slogan">「问我」 让经验帮你赚钱</string>
+    <string name="slogan">问我∙美食,发现身边美食</string>
     <string name="card_share">问我∙美食--美食卡片分享</string>
     <string name="ssdk_qq">QQ</string>
     <string name="ssdk_qzone">QQ空间</string>

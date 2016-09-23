@@ -32,6 +32,8 @@ import android.view.ViewDebug;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -115,7 +117,7 @@ public class ViewServer implements Runnable {
     /**
      * The default port used to start view servers.
      */
-    private static final int VIEW_SERVER_DEFAULT_PORT = 4939;
+    private static final int VIEW_SERVER_DEFAULT_PORT = 4939;//4939
     private static final int VIEW_SERVER_MAX_CONNECTIONS = 10;
     private static final String BUILD_TYPE_USER = "user";
 
@@ -556,9 +558,12 @@ public class ViewServer implements Runnable {
                 final Method dispatch = ViewDebug.class.getDeclaredMethod("dispatchCommand",
                         View.class, String.class, String.class, OutputStream.class);
                 dispatch.setAccessible(true);
+                Log.d("___view command", command);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(32 * 1024);
                 dispatch.invoke(null, window, command, parameters,
                         new UncloseableOutputStream(client.getOutputStream()));
-
+                byte[] datas = byteArrayOutputStream.toByteArray();
+                Log.d("_____view data", new String(datas));
                 if (!client.isOutputShutdown()) {
                     out = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
                     out.write("DONE\n");

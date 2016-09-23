@@ -18,7 +18,10 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -37,7 +40,7 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/image"
                     android:layout_width="match_parent"
-                    android:layout_height="260dp"
+                    android:layout_height="276dp"
                     android:scaleType="centerCrop"
                     bind:uri="@{viewModel.imageUrl}"
                     fresco:placeholderImage="@mipmap/ic_launcher" />
@@ -74,9 +77,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
                     android:gravity="center"
-                    android:text="来自 「问我」"
+                    android:text="来自 「问我」美食"
                     android:textColor="@color/gray"
                     android:visibility="@{viewModel.sloganVisibility?View.VISIBLE:View.GONE}" />
             </RelativeLayout>
